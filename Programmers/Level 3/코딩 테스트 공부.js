@@ -12,11 +12,9 @@ function solution(alp, cop, problems) {
   for (let i = alp; i < maxAl + 1; i += 1) {
     for (let j = cop; j < maxCo + 1; j += 1) {
       if (i + 1 < maxAl + 1)
-        dp[i + 1][j] =
-          dp[i + 1][j] < dp[i][j] + 1 ? dp[i + 1][j] : dp[i][j] + 1;
+        dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j] + 1);
       if (j + 1 < maxCo + 1)
-        dp[i][j + 1] =
-          dp[i][j + 1] < dp[i][j] + 1 ? dp[i][j + 1] : dp[i][j] + 1;
+        dp[i][j + 1] = Math.min(dp[i][j + 1], dp[i][j] + 1);
 
       problems.forEach(([alp_req, cop_req, alp_rwd, cop_rwd, cost]) => {
         if (i < alp_req || j < cop_req) return;
