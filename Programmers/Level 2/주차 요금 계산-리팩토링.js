@@ -1,6 +1,5 @@
 const IN = "IN";
 const OUT = "OUT";
-const LAST_TIME = "23:59";
 const FULL_TIME = 1439;
 
 const convertTime = (time) => {
@@ -23,8 +22,6 @@ function solution(fees, records) {
       parkingLog[carNumber] -= FULL_TIME - convertedTime;
     }
   });
-
-  console.log(parkingLog);
 
   const costList = [];
   Object.entries(parkingLog).forEach(([carNumber, parkingTime]) => {

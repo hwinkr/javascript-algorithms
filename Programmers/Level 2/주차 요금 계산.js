@@ -28,14 +28,12 @@ function solution(fees, records) {
       timeBoard[carNumber] = [convertedTime];
       return;
     }
-    timeBoard[carNumber] = [...timeBoard[carNumber], convertedTime];
+    timeBoard[carNumber].push(convertedTime);
   });
 
   const inOutTimeList = Object.keys(timeBoard)
     .sort()
     .map((carName) => timeBoard[carName]);
-
-  console.log(inOutTimeList);
 
   const costList = [];
   inOutTimeList.forEach((timeList) => {
