@@ -36,6 +36,10 @@ class MaxHeap {
     this.#maxHeapify(maxChild);
   }
 
+  isEmptyHeap() {
+    return this.#heap.length === 0;
+  }
+
   heapPush(value) {
     this.#heap.push(value);
 
@@ -59,10 +63,6 @@ class MaxHeap {
 
   pop() {
     this.#heap.pop();
-  }
-
-  getHeap() {
-    return this.#heap;
   }
 }
 
@@ -104,6 +104,10 @@ class MinHeap {
     this.#minHeapify(minChild);
   }
 
+  isEmptyHeap() {
+    return this.#heap.length === 0;
+  }
+
   heapPush(value) {
     this.#heap.push(value);
 
@@ -128,10 +132,6 @@ class MinHeap {
   pop() {
     this.#heap.pop();
   }
-
-  getHeap() {
-    return this.#heap;
-  }
 }
 
 const CMD_INSERT = "I";
@@ -151,49 +151,52 @@ function solution(operations) {
       return;
     }
 
-    if (number === DEL_MAX_HEAP && maxHeap.getHeap().length > 0) {
+    if (number === DEL_MAX_HEAP && !maxHeap.isEmptyHeap()) {
       maxHeap.heapPop();
       minHeap.pop();
-    } else if (number === DEL_MIN_HEAP && minHeap.getHeap().length > 0) {
+    } else if (number === DEL_MIN_HEAP && !minHeap.isEmptyHeap()) {
       minHeap.heapPop();
       maxHeap.pop();
     }
   });
 
-  return maxHeap.getHeap().length === 0
+  return maxHeap.isEmptyHeap()
     ? [0, 0]
     : [maxHeap.heapPop(), minHeap.heapPop()];
 }
 
-// console.log(
-//   solution(["I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1"])
-// ); [0, 0]
+console.log(
+  solution(["I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1"])
+);
+[0, 0];
 
-// console.log(
-//   solution([
-//     "I -45",
-//     "I 653",
-//     "D 1",
-//     "I -642",
-//     "I 45",
-//     "I 97",
-//     "D 1",
-//     "D -1",
-//     "I 333",
-//   ])
-// ); [333, -45]
+console.log(
+  solution([
+    "I -45",
+    "I 653",
+    "D 1",
+    "I -642",
+    "I 45",
+    "I 97",
+    "D 1",
+    "D -1",
+    "I 333",
+  ])
+);
+[333, -45];
 
-// console.log(
-//   solution([
-//     "I 4",
-//     "I 3",
-//     "I 2",
-//     "I 1",
-//     "D 1",
-//     "D 1",
-//     "D -1",
-//     "D -1",
-//     "I 5",
-//     "I 6",
-//   ])
-// ); [6, 5]
+console.log(
+  solution([
+    "I 4",
+    "I 3",
+    "I 2",
+    "I 1",
+    "D 1",
+    "D 1",
+    "D -1",
+    "D -1",
+    "I 5",
+    "I 6",
+  ])
+);
+[6, 5];
